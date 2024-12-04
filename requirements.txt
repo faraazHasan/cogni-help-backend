@@ -59,3 +59,5 @@ openai==1.10.0
 #for aws
 boto3==1.34.31
 bcrypt==4.0.0
+python-jose==3.3.0
+sendgrid==6.11.0
