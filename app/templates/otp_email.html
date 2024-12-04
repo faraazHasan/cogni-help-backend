@@ -1,0 +1,36 @@
+{% set header_logo = HEADER_LOGO %}
+{% include 'email_header.html' %}
+
+<div style="text-align: left; background: #fff; border-radius: 20px; padding: 40px;">
+  <p style="color: #000; margin-top: 0">Dear {{ user_name }},</p>
+
+  <p style="color: #000">
+    Your Verification Code is: {{ otp }}
+  </p>
+
+  <p style="color: #000">
+    Please enter this code on the signup page to verify your email and continue with the registration process. For security reasons, this Code is valid for 15 minutes.
+  </p>
+
+  <p style="color: #000">
+    If you did not request this code, please ignore this email or contact our support team at <a href="mailto:{{ FROM_EMAIL }}">{{ FROM_EMAIL }}</a>.
+  </p>
+
+  <p style="color: #000">
+    We're excited for you to be a part of our community.
+  </p>
+
+  <p style="color: #000">
+    Warm regards,<br />
+    Cogni Help Team
+  </p>
+</div>
+
+{% set terms_url = TERMS_AND_CONDITIONS_URL %}
+{% set privacy_url = PRIVACY_POLICY_URL %}
+{% set facebook_logo = FACEBOOK_LOGO %}
+{% set twitter_logo = TWITTER_LOGO %}
+{% set twitter_url = TWITTER_URL %}
+{% set facebook_url = FACEBOOK_URL %}
+{% set current_year = CURRENT_YEAR %}
+{% include 'email_footer.html' %}
