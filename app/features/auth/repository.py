@@ -3,6 +3,7 @@ import json
 import os
 from datetime import datetime
 
+from app.features.user.schemas import CurrentUser
 from jinja2 import Environment, FileSystemLoader
 from passlib.hash import bcrypt
 from sqlalchemy import and_
@@ -23,6 +24,7 @@ from app.features.auth.schemas import (
 )
 from app.features.auth.utils import (
     create_access_token,
+    decode_token,
     send_verification_otp,
     verify_password,
 )
@@ -412,6 +414,24 @@ async def update_password_of_admin(request: UpdatePassword, db: Session):
             "success": True,
         }
 
+    except Exception as e:
+        print(e)
+        return {
+            "message": constants.SOMETHING_WENT_WRONG,
+            "success": False,
+        }
+    
+async def delete_session(current_user: CurrentUser, db: Session):
+    try:
+        print(current_user)
+        sessions = db.query(UserSession).filter(UserSession.user_id == current_user["id"]).all()
+        if sessions:
+            for session in sessions:
+                db.delete(session)
+        return {
+            "message": constants.SESSION_DELETED,
+            "success": True,
+        }
     except Exception as e:
         print(e)
         return {

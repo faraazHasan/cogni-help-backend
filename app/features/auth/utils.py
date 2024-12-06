@@ -37,6 +37,13 @@ def create_access_token(data: dict):
     )
     return encoded_jwe
 
+def decode_token(token: str):
+    jwt_token = jwe.decrypt(token, "asecret128bitkey")
+    decoded_token = jwt.decode(
+        jwt_token, keys["SECRET_KEY"], algorithms=keys["ALGORITHM"]
+    )
+    return decoded_token
+
 
 def verify_password(plain_password, hashed_password):
     return bcrypt.verify(plain_password, hashed_password)

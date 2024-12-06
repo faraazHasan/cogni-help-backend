@@ -38,6 +38,7 @@ class Auth(BaseModel):
     UPDATE_ADMIN_IMAGE: str
     UPDATE_ADMIN_DETAILS: str
     UPDATE_PASSWORD: str
+    DELETE_SESSION: str
 
 
 class User(BaseModel):
@@ -88,6 +89,7 @@ auth_routes: Auth = {
     "UPDATE_ADMIN_IMAGE": "/update-admin-image",
     "UPDATE_ADMIN_DETAILS": "/update-admin-details",
     "UPDATE_PASSWORD": "/update-password",
+    "DELETE_SESSION": "/delete-session"
 }
 
 user_routes: User = {

@@ -24,9 +24,7 @@ class UserSession(Base):
     )
     user = relationship(
         "User",
-        back_populates="user_sessions",
-        cascade="all, delete-orphan",
-        single_parent=True,
+        back_populates="user_sessions"
     )
 
     def to_dict(self):

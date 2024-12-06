@@ -46,9 +46,13 @@ class User(Base):
         onupdate=datetime.now,
     )
     company = relationship("Company", back_populates="users")
-    # quizes = relationship("Quizs", back_populates="users")
     user_detail = relationship("UserDetails", back_populates="user", uselist=False)
-    user_sessions = relationship("UserSession", back_populates="user")
+    user_sessions = relationship(
+        "UserSession", 
+        back_populates="user",
+        cascade="all, delete-orphan",
+        single_parent=True
+    )
 
     def to_dict(self):
         return {

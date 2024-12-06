@@ -1,9 +1,12 @@
+from app.features.user.schemas import CurrentUser
+from app.utils.middlewares.oauth import is_user_authorized
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.common.schemas import ResponseModal
 from app.database import db_connection
 from app.features.auth.repository import (
+    delete_session,
     forgot_password,
     login,
     resend_verification_details,
@@ -98,5 +101,12 @@ async def update_admin_password(
     db : Session = Depends(db_connection)
 ):
     return await update_password_of_admin(request, db)
+
+@router.get(auth_routes.DELETE_SESSION, response_model=ResponseModal)
+async def delete_user_session(
+    current_user: CurrentUser = Depends(is_user_authorized),
+    db : Session = Depends(db_connection)
+):
+    return await delete_session(current_user, db)
 
 
